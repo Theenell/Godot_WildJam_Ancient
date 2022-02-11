@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Enemy/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://assets/Individual Sprites/PlayerSprites/Pelle/Move2.png" type="Texture" id=2]
+[ext_resource path="res://assets/Individual Sprites/PlayerSprites/Pelle/Move1.png" type="Texture" id=3]
+[ext_resource path="res://assets/Individual Sprites/PlayerSprites/Pelle/stand.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.99894, 1.82143 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5.21498, 4.9858 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+scale = Vector2( 10.3531, 10.3531 )
+collision_layer = 16
+collision_mask = 33
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=["Characters", "Enemies"]]
+position = Vector2( 0.446457, 1.89294 )
+scale = Vector2( 0.0486097, 0.0475151 )
+frames = SubResource( 1 )
+animation = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+modulate = Color( 0.313726, 0, 0.72549, 1 )
+self_modulate = Color( 0.2, 0, 0.443137, 1 )
+position = Vector2( 0.440689, 1.86053 )
+scale = Vector2( 1.00595, 2.63302 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -0.468216, 0.561863 )
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+modulate = Color( 0.0705882, 0.705882, 0.0941176, 1 )
+self_modulate = Color( 0.106477, 0.742188, 0.101471, 1 )
+position = Vector2( 0.898531, 1.30089 )
+rotation = -0.00208016
+scale = Vector2( 0.994377, 1.00001 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

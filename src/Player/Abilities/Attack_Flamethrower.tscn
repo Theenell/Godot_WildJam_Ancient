@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Player/Abilities/Attack_Flamethrower.gd" type="Script" id=1]
+[ext_resource path="res://assets/Individual Sprites/PlayerSprites/MainChar_Attack1_Alone.png" type="Texture" id=2]
+[ext_resource path="res://assets/Individual Sprites/PlayerSprites/MainChar_Attack2_Alone.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "flame",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 344.605, 98.3529 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+collision_layer = 34
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=["abilities", "characters", "weapons"]]
+light_mask = 0
+position = Vector2( 5.33936, -6.67419 )
+frames = SubResource( 1 )
+animation = "flame"
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Abilities"]]
+position = Vector2( 23.2814, -7.54684 )
+shape = SubResource( 2 )
