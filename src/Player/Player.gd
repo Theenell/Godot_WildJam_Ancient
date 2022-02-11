@@ -17,7 +17,7 @@ var is_throwing = false
 var shoot_enabled = true
 var teleport_delay_finished = true
 
-var playerHitPoints = 100
+var playerHitPoints = 80
 var mainAttackDamageValue = 10
 var mainCharPwrLevel = 1
 
