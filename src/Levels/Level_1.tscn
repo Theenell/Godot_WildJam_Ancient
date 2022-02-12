@@ -1,23 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Enemy/Mummy.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 365.864, 10 )
+extents = Vector2( 466.216, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 53 )
 
 [node name="Level_1" type="Node2D"]
 
 [node name="World" type="StaticBody2D" parent="."]
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World"]
+[node name="Ground" type="CollisionShape2D" parent="World"]
 modulate = Color( 0.384314, 0.0784314, 0.0784314, 1 )
+position = Vector2( 101.784, 0 )
 shape = SubResource( 1 )
+
+[node name="Wall" type="CollisionShape2D" parent="World"]
+modulate = Color( 0.576471, 0.00392157, 0.00392157, 1 )
+position = Vector2( 579, -44 )
+shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -1.5874, -53.1779 )
 
 [node name="Mummy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 185, -31 )
+position = Vector2( 448, -41 )
 scale = Vector2( 2.88, 2.88 )

@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Wildjam_Themeless"
+run/main_scene="res://src/Levels/Level_1.tscn"
 config/icon="res://icon.png"
 
 [input]

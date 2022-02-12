@@ -2,36 +2,33 @@ extends KinematicBody2D
 
 #movement variables
 export var gravity = 3
-export var speed = 30
+export var speed = 40
 var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
 var acceleration = 5
-var max_speed = 40
-var jump = -85
+
 var direction = 1
 var turnAround = false
 #Enemy Viewport Activation Vars
-var enemyInPlayerVisibilityRange = false
+var enemyInPlayerViewport = false
 
 #Enemy HP/DMG variables
 var enemyHitPoints = 100
 var damageValue = 25
 var powerLevel = 1 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity.x = speed * direction
 	velocity.y += gravity
-	enemyInPlayerVisibilityRange = checkPlayerVisibilityRange()
-	if enemyInPlayerVisibilityRange == true:		
+	enemyInPlayerViewport = getVarEnemyInPlayerViewport()
+	if enemyInPlayerViewport == true:		
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)	
 		movementHandler()
 	else:
 		pass
 
-func checkPlayerVisibilityRange():
-	
-	var checkEnemyInViewport = true
-	return checkEnemyInViewport
+func getVarEnemyInPlayerViewport():
+	return enemyInPlayerViewport
 	
 func movementHandler():
 	if is_on_wall() == true:
@@ -51,4 +48,5 @@ func movement_TurnAround(turnAround):
 		$AnimatedSprite.flip_h = true
 
 func _on_EnemyEntered_PlayerViewport():
-	print("entered viewport")
+	enemyInPlayerViewport = true
+	print ("eInVp")
