@@ -33,8 +33,13 @@ func _physics_process(delta: float) -> void:
 		if friction == true:
 			velocity.x = lerp(velocity.x, 0, 0.4)
 
-			
-		
-
-			
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
+	
+	pickaxe_attack()
+	
+func pickaxe_attack():
+	if Input.is_action_just_pressed("axe_attack"):
+		print("axe_attack")
+		$Axe_hitbox.disabled = false
+		yield(get_tree().create_timer(1.0), "timeout")
+		$Axe_hitbox.disabled = true
