@@ -36,13 +36,16 @@ func movementHandler():
 		movement_TurnAround(false)
 		
 func movement_TurnAround(turnAround):
-	direction = direction *-1
+	
 	if turnAround == true and is_on_floor():
 #		$AnimatedSprite.play("run")
-		$AnimatedSprite.flip_h = false
+#		$AnimatedSprite.flip_h = false
+		direction = direction *-1
+		pass
 	elif turnAround == false and is_on_floor():
 #		$AnimatedSprite.play("run")
-		$AnimatedSprite.flip_h = true
+#		$AnimatedSprite.flip_h = true
+		pass
 
 func _on_EnemyEntered_PlayerViewport():
 	enemyInPlayerViewport = true
