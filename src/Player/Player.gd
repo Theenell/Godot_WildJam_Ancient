@@ -1,5 +1,6 @@
 extends KinematicBody2D
-
+#const generalClassLib = get_parent().get_node("GeneralClassLib")
+var generalClassLib = preload("res://src/GeneralClassLib.gd").new()
 export var gravity = 3
 var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
@@ -11,7 +12,6 @@ const projectile_1 = preload("res://src/Player/projectiles/projectile_1.tscn")
 
 
 func _physics_process(delta: float) -> void:
-	
 	var friction = false
 	velocity.y += gravity
 	
@@ -62,3 +62,6 @@ func _on_Axe_body_entered(body):
 	if body.is_in_group("enemy"):
 		if body.has_method("take_damage"):
 			body.take_damage(axe_damage)
+
+#func _on_Axe_body_entered(body):
+#	generalClassLib.take_damage(body,axe_damage)
