@@ -5,7 +5,6 @@ export var gravity = 3
 export var speed = 40
 var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
-var acceleration = 5
 
 var direction = 1
 var turnAround = false
@@ -41,10 +40,10 @@ func movementHandler():
 		
 func movement_TurnAround(turnAround):
 	if turnAround == true and is_on_floor():
-		$AnimatedSprite.play("run")
+#		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = false
 	if turnAround == false and is_on_floor():
-		$AnimatedSprite.play("run")
+#		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = true
 
 func _on_EnemyEntered_PlayerViewport():
