@@ -7,6 +7,7 @@ var acceleration = 5
 var max_speed = 40
 var jump = -85
 
+const projectile_1 = preload("res://src/Player/projectiles/projectile_1.tscn")
 
 
 func _physics_process(delta: float) -> void:
@@ -36,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 	pickaxe_attack()
+	aim_and_shoot()
 	
 func pickaxe_attack():
 	if Input.is_action_just_pressed("axe_attack"):
@@ -43,3 +45,12 @@ func pickaxe_attack():
 		$Axe_hitbox.disabled = false
 		yield(get_tree().create_timer(1.0), "timeout")
 		$Axe_hitbox.disabled = true
+func aim_and_shoot():
+	$Muzzle.look_at(get_global_mouse_position())
+	if Input.is_action_just_pressed("shoot"):
+
+			var dir = Vector2(1, 0).rotated($Muzzle.global_rotation)
+			var pos = $Muzzle.global_position
+			var p = projectile_1.instance()
+			get_parent().add_child(p)
+			p.start(pos, dir)
