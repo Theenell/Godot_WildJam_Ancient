@@ -1,4 +1,5 @@
 extends KinematicBody2D
+var generalClassLib = preload("res://src/GeneralClassLib.gd").new()
 export var gravity = 3
 var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
@@ -83,12 +84,9 @@ func _on_Axe_body_entered(body):
 		if body.has_method("take_damage"):
 			body.take_damage(axe_damage)
 
-<<<<<<< HEAD
-
 
 func _on_Wall_jump_timer_timeout():
 	can_wall_jump = true
-=======
+
 #func _on_Axe_body_entered(body):
 #	generalClassLib.take_damage(body,axe_damage)
->>>>>>> AlternativeSolution_ClassLibs
