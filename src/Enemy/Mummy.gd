@@ -22,7 +22,7 @@ func movementHandler():
 		movement_TurnAround(turnAround)
 	else:
 		turnAround = false
-		movement_turnAround(turnAround)
+		movement_TurnAround(turnAround)
 		
 func movement_TurnAround(turnAround):
 	if turnAround == true and is_on_floor():
