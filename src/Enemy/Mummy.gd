@@ -48,26 +48,23 @@ func movement_TurnAround(turnAround):
 
 func _on_EnemyEntered_PlayerViewport():
 	enemyInPlayerViewport = true
-#	print (enemyInPlayerViewport)
-
-#func _on_Area_ProjectileHitscan_ProjectileBody_Entered(body):
-#	if body.name == "projectile_gd":
-#		pass
-##		var mummyHitpoints = body.g
-#	pass>
 
 func getMummyHitpoints():
 	return mummyHitPoints
 
 func take_damage(dmgVal):
-	mummyHitPoints = getMummyHitpoints() - dmgVal
-	if mummyHitPoints <= 0:
-		mummyIsDead()
-	else:
-		pass
-		
+	if dmgVal >= 0:
+		mummyHitPoints = getMummyHitpoints() - dmgVal
+		setEnemyHealthbar(mummyHitPoints)
+		velocity.y -= 100
+		if mummyHitPoints <= 0:
+			mummyIsDead()
+		else:
+			pass
+
+func setEnemyHealthbar(mummyCurrentHitPoints):
+	pass
 func mummyIsDead():
 	executeEnemyDespawn()
-	
 func executeEnemyDespawn():
 	queue_free()
