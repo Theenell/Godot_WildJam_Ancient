@@ -13,13 +13,10 @@ func getCallerNodeBodyName(body):
 	
 func take_damage(body,dmgVal):
 	getCallerNodeBodyName(body)
-	
 	if body.is_in_group("enemies"):
 		if callerNodeBodyName == "Mummy":
 			if dmgVal >= 0:
-#				var mummyHitPoints = .getMummyHitpoints() - dmgVal
 				var mummyHitPoints = body.getMummyHitpoints() - dmgVal
-				print(mummyHitPoints)
 				body.setMummyHitpoints(mummyHitPoints)
 				body.setEnemyHealthbar(mummyHitPoints)
 				body.velocity.y -= 50
