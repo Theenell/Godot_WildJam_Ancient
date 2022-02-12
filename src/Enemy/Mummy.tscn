@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Enemy/Mummy.gd" type="Script" id=1]
 
@@ -7,6 +7,13 @@ extents = Vector2( 10.5, 9.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 7 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.592803 )
+colors = PoolColorArray( 0, 1, 0.156863, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
 [node name="Mummy" type="KinematicBody2D" groups=["enemy"]]
 collision_layer = 4
@@ -30,6 +37,17 @@ shape = SubResource( 2 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
 scale = Vector2( 0.779979, 0.703963 )
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -8.0
+margin_top = -10.0
+margin_right = 2040.0
+margin_bottom = 30.0
+rect_scale = Vector2( 0.00790619, 0.0378757 )
+texture_under = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="Area_ProjectileHitscan" to="." method="_on_Area_ProjectileHitscan_ProjectileBody_Entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_EnemyEntered_PlayerViewport"]
