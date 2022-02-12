@@ -10,6 +10,7 @@ var axe_damage = 50
 const projectile_1 = preload("res://src/Player/projectiles/projectile_1.tscn")
 var health = 100
 
+var on_wall = false
 var can_wall_jump = true
 
 func _physics_process(delta: float) -> void:
@@ -25,23 +26,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		friction = true
 
-	if is_on_floor():
+	if is_on_floor() and on_wall == false:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y += jump_force
 		if friction == true:
 			velocity.x = lerp(velocity.x, 0, 0.2) #farten minskar 20% varje frame
 			
 			
-	if is_on_wall():
+	if on_wall == true:
 		if can_wall_jump == true:
-			if Input.is_action_pressed("jump") and Input.is_action_pressed("move_left"):
-				velocity.y += jump_force
+			print("is_colliding")
+			if Input.is_action_just_pressed("jump"):
+				velocity.y += -180
 				can_wall_jump = false
 				$Wall_jump_timer.start()
-			if Input.is_action_pressed("jump") and Input.is_action_pressed("move_right"):
-				velocity.y += jump_force
-				can_wall_jump = false
-				$Wall_jump_timer.start()
+
 	
 	
 	else:
@@ -52,7 +51,15 @@ func _physics_process(delta: float) -> void:
 	
 	pickaxe_attack()
 	aim_and_shoot()
-	
+	wall_check()
+
+func wall_check():
+	if $RayCast_Left.is_colliding() or $RayCast_Right.is_colliding():
+		on_wall = true
+	else:
+		on_wall = false
+func wall_jump():
+	pass
 func pickaxe_attack():
 	if Input.is_action_just_pressed("axe_attack"):
 		$AnimationPlayer.play("axe_swing")
