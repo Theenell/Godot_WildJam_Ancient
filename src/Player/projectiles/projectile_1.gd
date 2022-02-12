@@ -1,14 +1,10 @@
 extends KinematicBody2D
-
+var generalClassLib = load("res://src/GeneralClassLib.gd").new()
 
 var velocity = Vector2.ZERO
 var speed = 200
 var damage = 30 
 var gravity = 1
-
-
-
-
 
 
 
@@ -22,6 +18,7 @@ func _physics_process(delta):
 	move_and_collide(velocity * delta)
 
 
+<<<<<<< HEAD
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("enemy"):
@@ -31,3 +28,13 @@ func _on_Area2D_body_entered(body):
 	else:
 		queue_free()
 
+=======
+#func _on_Area2D_body_entered(body):
+#	if body.is_in_group("enemy"):
+#		if body.has_method("take_damage"):
+#			body.take_damage(damage)
+#			queue_free()
+func _on_Area2D_body_entered(body):
+	if not body.name == "projectile_1":
+		generalClassLib.take_damage(body,damage)
+>>>>>>> AlternativeSolution_ClassLibs

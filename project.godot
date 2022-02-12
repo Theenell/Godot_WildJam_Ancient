@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "GeneralClassLib",
+"language": "GDScript",
+"path": "res://src/GeneralClassLib.gd"
+} ]
+_global_script_class_icons={
+"GeneralClassLib": ""
+}
+
 [application]
 
 config/name="Wildjam_Themeless"
@@ -63,7 +73,11 @@ shoot={
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="objects"
+<<<<<<< HEAD
 2d_physics/layer_5="Player_projectile"
+=======
+2d_physics/layer_5="projectiles"
+>>>>>>> AlternativeSolution_ClassLibs
 
 [physics]
 
