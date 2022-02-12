@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -7,6 +7,21 @@
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2.86643, 15.7981 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "axe_swing"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Axe:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -33.5276, 18.4758, -33.5276 ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -20,13 +35,6 @@ scale = Vector2( 0.996502, 0.988143 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="Axe_hitbox" type="CollisionShape2D" parent="."]
-modulate = Color( 0.396078, 0, 0.690196, 1 )
-position = Vector2( 16.5178, -8.02294 )
-rotation = 1.14064
-shape = SubResource( 2 )
-disabled = true
-
 [node name="Weapon" type="Sprite" parent="."]
 position = Vector2( 0.375585, -0.368128 )
 scale = Vector2( 0.383359, 0.0274461 )
@@ -36,3 +44,18 @@ offset = Vector2( 0, -20 )
 
 [node name="Muzzle" type="Position2D" parent="Weapon"]
 position = Vector2( 60.9398, 16.5073 )
+
+[node name="Axe" type="Area2D" parent="."]
+rotation = -0.585166
+
+[node name="Axe_hitbox" type="CollisionShape2D" parent="Axe"]
+modulate = Color( 0.396078, 0, 0.690196, 1 )
+position = Vector2( 16.5178, -8.02294 )
+rotation = 1.14064
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/axe_swing = SubResource( 3 )
+
+[connection signal="body_entered" from="Axe" to="." method="_on_Axe_body_entered"]

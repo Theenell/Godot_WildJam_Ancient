@@ -4,9 +4,9 @@ export var gravity = 3
 var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
 var acceleration = 5
-var max_speed = 40
+var max_speed = 60
 var jump = -85
-
+var axe_damage = 50
 const projectile_1 = preload("res://src/Player/projectiles/projectile_1.tscn")
 
 
@@ -41,10 +41,12 @@ func _physics_process(delta: float) -> void:
 	
 func pickaxe_attack():
 	if Input.is_action_just_pressed("axe_attack"):
+		$AnimationPlayer.play("axe_swing")
 		print("axe_attack")
-		$Axe_hitbox.disabled = false
+		$Axe/Axe_hitbox.disabled = false
 		yield(get_tree().create_timer(1.0), "timeout")
-		$Axe_hitbox.disabled = true
+		$Axe/Axe_hitbox.disabled = true
+		
 func aim_and_shoot():
 	$Weapon.look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("shoot"):
@@ -54,3 +56,9 @@ func aim_and_shoot():
 			var p = projectile_1.instance()
 			get_parent().add_child(p)
 			p.start(pos, dir)
+
+
+func _on_Axe_body_entered(body):
+	if body.is_in_group("enemy"):
+		if body.has_method("take_damage"):
+			body.take_damage(axe_damage)
