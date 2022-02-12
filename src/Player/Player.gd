@@ -80,13 +80,7 @@ func player_dead():
 	pass
 		
 func _on_Axe_body_entered(body):
-	if body.is_in_group("enemy"):
-		if body.has_method("take_damage"):
-			body.take_damage(axe_damage)
-
+	generalClassLib.take_damage(body,axe_damage)
 
 func _on_Wall_jump_timer_timeout():
 	can_wall_jump = true
-
-#func _on_Axe_body_entered(body):
-#	generalClassLib.take_damage(body,axe_damage)
