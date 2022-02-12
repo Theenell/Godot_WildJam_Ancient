@@ -24,6 +24,22 @@ modulate = Color( 0.576471, 0.00392157, 0.00392157, 1 )
 position = Vector2( 579, -44 )
 shape = SubResource( 2 )
 
+[node name="Wall2" type="CollisionShape2D" parent="World"]
+modulate = Color( 0.576471, 0.00392157, 0.00392157, 1 )
+position = Vector2( 458.184, -139.331 )
+shape = SubResource( 2 )
+
+[node name="Wall3" type="CollisionShape2D" parent="World"]
+modulate = Color( 0.576471, 0.00392157, 0.00392157, 1 )
+position = Vector2( 579.944, -228.999 )
+shape = SubResource( 2 )
+
+[node name="Wall4" type="CollisionShape2D" parent="World"]
+modulate = Color( 0.576471, 0.00392157, 0.00392157, 1 )
+position = Vector2( 421.373, -262.035 )
+rotation = 1.57187
+shape = SubResource( 2 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -176.587, -50.1779 )
 

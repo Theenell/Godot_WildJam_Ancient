@@ -58,4 +58,8 @@ disabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/axe_swing = SubResource( 3 )
 
+[node name="Wall_jump_timer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="Axe" to="." method="_on_Axe_body_entered"]
+[connection signal="timeout" from="Wall_jump_timer" to="." method="_on_Wall_jump_timer_timeout"]
