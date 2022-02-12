@@ -12,7 +12,7 @@ var turnAround = false
 var enemyInPlayerViewport = false
 
 #Enemy HP/DMG variables
-var enemyHitPoints = 100
+var mummyHitPoints = 100
 var damageValue = 25
 var powerLevel = 1 
 
@@ -36,7 +36,6 @@ func movementHandler():
 		movement_TurnAround(false)
 		
 func movement_TurnAround(turnAround):
-	
 	if turnAround == true and is_on_floor():
 #		$AnimatedSprite.play("run")
 #		$AnimatedSprite.flip_h = false
@@ -49,4 +48,26 @@ func movement_TurnAround(turnAround):
 
 func _on_EnemyEntered_PlayerViewport():
 	enemyInPlayerViewport = true
-	print ("eInVp")
+#	print (enemyInPlayerViewport)
+
+#func _on_Area_ProjectileHitscan_ProjectileBody_Entered(body):
+#	if body.name == "projectile_gd":
+#		pass
+##		var mummyHitpoints = body.g
+#	pass>
+
+func getMummyHitpoints():
+	return mummyHitPoints
+
+func take_damage(dmgVal):
+	mummyHitPoints = getMummyHitpoints() - dmgVal
+	if mummyHitPoints <= 0:
+		mummyIsDead()
+	else:
+		pass
+		
+func mummyIsDead():
+	executeEnemyDespawn()
+	
+func executeEnemyDespawn():
+	queue_free()
