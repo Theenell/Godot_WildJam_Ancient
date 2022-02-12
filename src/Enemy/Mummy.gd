@@ -7,7 +7,7 @@ var velocity = Vector2.ZERO
 var FLOOR_NORMAL = Vector2(0,-1)
 
 #movement variables
-var direction = -1
+var direction 
 var turnAround = false
 
 #Enemy Viewport Activation Vars
@@ -19,21 +19,28 @@ var damageValue = 25
 var powerLevel = 1 
 
 func _physics_process(_delta):
+	
+	player_position()
 	velocity.x = speed * direction
 	velocity.y += gravity
-	enemyInPlayerViewport = getVarEnemyInPlayerViewport()
+
+
 	if enemyInPlayerViewport == true:		
 		velocity = move_and_slide(velocity, FLOOR_NORMAL)	
 		movementHandler()
 	else:
 		pass
-
-func getVarEnemyInPlayerViewport():
-	return enemyInPlayerViewport	
 	
-func _on_EnemyEntered_PlayerViewport():
-	enemyInPlayerViewport = true
+	
 
+func player_position():
+	if get_parent().get_node("Player").global_position.x <= global_position.x:
+		direction = -1
+	else:
+		direction = 1
+	velocity.x = speed * direction
+	velocity.y += gravity
+	
 func movementHandler():
 	if is_on_wall() == true:
 		movement_TurnAround(true)
@@ -70,10 +77,13 @@ func setMummyHitpoints(newHitpoints):
 #			mummyIsDead()
 #		else:
 #			pass
-
 func setEnemyHealthbar(mummyCurrentHitPoints):
 	pass
 func mummyIsDead():
 	executeEnemyDespawn()
 func executeEnemyDespawn():
 	queue_free()
+	
+	
+func _on_EnemyEntered_PlayerViewport():
+	enemyInPlayerViewport = true

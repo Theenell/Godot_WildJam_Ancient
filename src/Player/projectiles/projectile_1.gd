@@ -4,7 +4,7 @@ var generalClassLib = load("res://src/GeneralClassLib.gd").new()
 var velocity = Vector2.ZERO
 var speed = 300
 var damage = 30 
-var gravity = 1
+var gravity = 5
 
 
 
@@ -35,5 +35,10 @@ func _on_Area2D_body_entered(body):
 #	if not body.name == "projectile_1":
 	if body.is_in_group("enemies"): 
 		generalClassLib.take_damage(body,damage)
+		queue_free()
 	else:
 		queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

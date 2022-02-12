@@ -3,10 +3,10 @@
 [ext_resource path="res://src/Enemy/Mummy.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.5, 9.5 )
+extents = Vector2( 2.99563, 6.6213 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 7 )
+extents = Vector2( 2.40357, 5.22423 )
 
 [node name="Mummy" type="KinematicBody2D" groups=[
 "enemies",

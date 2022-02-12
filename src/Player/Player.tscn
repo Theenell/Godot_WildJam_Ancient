@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://src/Player/ScreenShake.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.2397, 15.8923 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2.86643, 15.7981 )
@@ -35,20 +37,46 @@ scale = Vector2( 0.996502, 0.988143 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="Weapon" type="Sprite" parent="."]
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 3 )]
+
+[node name="Weapon_1" type="Sprite" parent="."]
 position = Vector2( 0.375585, -0.368128 )
 scale = Vector2( 0.383359, 0.0274461 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -20 )
 
-[node name="Muzzle" type="Position2D" parent="Weapon"]
-position = Vector2( 60.9398, 16.5073 )
+[node name="Muzzle" type="Position2D" parent="Weapon_1"]
+position = Vector2( 68.7831, 16.5073 )
+
+[node name="Weapon_2" type="Sprite" parent="."]
+position = Vector2( 0.198425, 0 )
+scale = Vector2( 0.541723, 0.0706643 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( 0, -30 )
+
+[node name="Muzzle_1" type="Position2D" parent="Weapon_2"]
+position = Vector2( 64.8952, -31.5187 )
+rotation = -0.547299
+
+[node name="Muzzle_2" type="Position2D" parent="Weapon_2"]
+position = Vector2( 65.1008, -14.1834 )
+rotation = -0.239379
+
+[node name="Muzzle_3" type="Position2D" parent="Weapon_2"]
+position = Vector2( 65.923, 3.15187 )
+rotation = 0.181155
+
+[node name="Muzzle_4" type="Position2D" parent="Weapon_2"]
+position = Vector2( 65.923, 22.0631 )
+rotation = 0.606346
 
 [node name="Axe" type="Area2D" parent="."]
 rotation = -0.585166
 
 [node name="Axe_hitbox" type="CollisionShape2D" parent="Axe"]
+visible = false
 modulate = Color( 0.396078, 0, 0.690196, 1 )
 position = Vector2( 16.5178, -8.02294 )
 rotation = 1.14064
@@ -64,14 +92,16 @@ wait_time = 0.5
 [node name="RayCast_Right" type="RayCast2D" parent="."]
 modulate = Color( 0.329412, 0.54902, 0.00784314, 1 )
 enabled = true
-cast_to = Vector2( 20, 0 )
+cast_to = Vector2( 10, 0 )
 
 [node name="RayCast_Left" type="RayCast2D" parent="."]
 modulate = Color( 0.403922, 0.65098, 0, 1 )
 enabled = true
-cast_to = Vector2( -20, 0 )
+cast_to = Vector2( -10, 0 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Recoil_Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="body_entered" from="Axe" to="." method="_on_Axe_body_entered"]
 [connection signal="timeout" from="Wall_jump_timer" to="." method="_on_Wall_jump_timer_timeout"]
+[connection signal="timeout" from="Recoil_Timer" to="." method="_on_Recoil_Timer_timeout"]
