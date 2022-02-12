@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -26,5 +27,12 @@ rotation = 1.14064
 shape = SubResource( 2 )
 disabled = true
 
-[node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 23.2911, -4.77045 )
+[node name="Weapon" type="Sprite" parent="."]
+position = Vector2( 0.375585, -0.368128 )
+scale = Vector2( 0.383359, 0.0274461 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( 0, -20 )
+
+[node name="Muzzle" type="Position2D" parent="Weapon"]
+position = Vector2( 60.9398, 16.5073 )
